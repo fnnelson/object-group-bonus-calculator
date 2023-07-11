@@ -9,3 +9,4 @@
             - if salary > $65K, bonus -1%
             - if bonus > 13%, bonus == 13%
             - if bonus < 0%, bonus == 0
+    - Run function that calculates bonus, on a loop for all employees
