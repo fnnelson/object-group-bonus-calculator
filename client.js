@@ -177,7 +177,6 @@ function calculateAllEmployeesBonuses(arrayOfEmployees) {
 
     const bonusAsDecimal = bonusPercentage / 100;
 
-
     person.bonusPercentage = bonusAsDecimal;
 
     let totalBonus = bonusAsDecimal * person.annualSalary;
@@ -198,5 +197,5 @@ function calculateAllEmployeesBonuses(arrayOfEmployees) {
 }
 
 // Tester
-let testingAllEmployees = calculateIndividualEmployeeBonus(employees);
+let testingAllEmployees = calculateAllEmployeesBonuses(employees);
 console.log(testingAllEmployees);
