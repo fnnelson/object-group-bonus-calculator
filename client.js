@@ -32,7 +32,8 @@ const employees = [
   }
 ];
 
-console.log('array of employee data: ',  employees );
+console.log('array of employee data: ', employees);
+
 
 
 // YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT
@@ -48,10 +49,148 @@ console.log('array of employee data: ',  employees );
 
 // This function will calculate 1 employee's bonus!
 //
-function calculateIndividualEmployeeBonus( employee ) {  
+
+// Write a declared function that takes in one Employee object (as an argument to the function), and return a new object with the following properties. Note these properties are different than the ones you start with!
+
+/** 
+ * The Bonus Calculation Function
+Write a declared function that takes in one Employee object (as an argument to the function), and return a new object with the following properties. Note these properties are different than the ones you start with!
+
+The name property should contain the employee's name.
+The bonusPercentage property should contain the bonus percentage the employee is to receive. See section below for calculation instructions.
+The totalCompensation property should be the adjusted annual compensation (base annual + bonus)
+The totalBonus should be the employee's total bonus rounded to the nearest dollar.
+ */
+
+/**
+ * Individual Bonus Rules
+Those who have a rating of a 2 or below should not receive a bonus.
+Those who have a rating of a 3 should receive a base bonus of 4% of their base annual income.
+Those who have a rating of a 4 should receive a base bonus of 6% of their base annual income.
+Those who have a rating of a 5 should receive a base bonus of 10% of their base annual income.
+If their employee number is 4 digits long, this means they have been with the company for longer than 15 years, and should receive an additional 5%.
+However, if their annual income is greater than $65,000, they should have their bonus adjusted down 1%.
+No bonus can be above 13% or below 0% total.
+ */
+
+let atticus = employees[0];
+// console.log(atticus)
+
+
+
+function calculateIndividualEmployeeBonus(employee) {
   // your logic here
+  console.log("in the function");
+
+  let bonusPercentage = 0;
+
+  if (employee.reviewRating <= 2) {
+    bonusPercentage = 0;
+  } else if (employee.reviewRating == 3) {
+    bonusPercentage = 0.04;
+  } else if (employee.reviewRating == 4) {
+    bonusPercentage = 0.06;
+  } else if (employee.reviewRating == 5) {
+    bonusPercentage = 0.1;
+  }
+
+  if (employee.employeeNumber.length == 4) {
+    bonusPercentage += 0.05;
+    // console.log('should be: 0.09:', bonusPercentage);
+  }
+
+  if (employee.annualSalary > 65000) {
+    bonusPercentage -= 0.01;
+    // console.log(bonusPercentage);
+  }
+
+  if (bonusPercentage > 0.13) {
+    bonusPercentage = 0.13;
+  } else if (bonusPercentage < 0) {
+    bonusPercentage = 0;
+  }
+  console.log(bonusPercentage);
+
+ 
+  employee.bonusPercentage = bonusPercentage;
+
+  let totalBonus = bonusPercentage * employee.annualSalary;
+  employee.totalBonus = totalBonus;
+
+  let totalCompensation = (1 * employee.annualSalary) + (totalBonus);
+  employee.totalCompensation = totalCompensation; 
   
-  
-  // return new object with bonus results
+  let newEmployee = {
+    name: employee.name,
+    bonusPercentage: bonusPercentage,
+    totalCompensation: totalCompensation,
+    totalBonus: Math.floor(totalBonus)
+  }
+  // let totalCompensation = bonusPercentage 
+
+  return newEmployee;
+
 
 }
+
+// Tester
+let testingAtticus = calculateIndividualEmployeeBonus(atticus);
+console.log(testingAtticus);
+
+function calculateAllEmployeeBonus (employee) {
+
+for (let person of employee) {
+
+    // your logic here
+    console.log("in the function");
+  
+    let bonusPercentage = 0;
+  
+    if (employee.reviewRating <= 2) {
+      bonusPercentage = 0;
+    } else if (employee.reviewRating == 3) {
+      bonusPercentage = 0.04;
+    } else if (employee.reviewRating == 4) {
+      bonusPercentage = 0.06;
+    } else if (employee.reviewRating == 5) {
+      bonusPercentage = 0.1;
+    }
+  
+    if (employee.employeeNumber.length == 4) {
+      bonusPercentage += 0.05;
+      // console.log('should be: 0.09:', bonusPercentage);
+    }
+  
+    if (employee.annualSalary > 65000) {
+      bonusPercentage -= 0.01;
+      // console.log(bonusPercentage);
+    }
+  
+    if (bonusPercentage > 0.13) {
+      bonusPercentage = 0.13;
+    } else if (bonusPercentage < 0) {
+      bonusPercentage = 0;
+    }
+    console.log(bonusPercentage);
+  
+   
+    employee.bonusPercentage = bonusPercentage;
+  
+    let totalBonus = bonusPercentage * employee.annualSalary;
+    employee.totalBonus = totalBonus;
+  
+    let totalCompensation = (1 * employee.annualSalary) + (totalBonus);
+    employee.totalCompensation = totalCompensation; 
+    
+    let newEmployee = {
+      name: employee.name,
+      bonusPercentage: bonusPercentage,
+      totalCompensation: totalCompensation,
+      totalBonus: Math.floor(totalBonus)
+    }
+    // let totalCompensation = bonusPercentage 
+  
+    return newEmployee;
+}
+}
+console.log(calculateAllEmployeeBonus(employees));
