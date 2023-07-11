@@ -1,0 +1,11 @@
+- Write a Function that calculates bonus
+        - Starting bonuses
+            - if rating >= 2, no bonus
+            - if rating == 3, bonus of 4%
+            - if rating == 4, bonus of 6%
+            - if rating == 5, bonus of 10%
+        - Bonus modifiers
+            - if employee.number.length == 4, bonus +5%
+            - if salary > $65K, bonus -1%
+            - if bonus > 13%, bonus == 13%
+            - if bonus < 0%, bonus == 0
